@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>琴剑江湖 — Account & Data Deletion</title>
+<title>琴剑江湖 — Jianghu: Sword &amp; Zither</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Jianghu: Sword &amp; Zither — A wuxia RPG where you wield the guqin as a weapon of power. Download on Android or play in your browser.">
 <style>
   @font-face {
     font-family: 'PageSerif';
@@ -27,6 +28,7 @@
     --accent-dim: rgba(201, 168, 76, 0.12);
     --danger: #B83A3A;
     --danger-dim: rgba(184, 58, 58, 0.08);
+    --hero-dark: #08080F;
   }
 
   @media (prefers-color-scheme: light) {
@@ -46,10 +48,7 @@
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html {
-    font-size: 16px;
-    scroll-behavior: smooth;
-  }
+  html { font-size: 16px; scroll-behavior: smooth; }
 
   body {
     font-family: 'PageSans', sans-serif;
@@ -60,18 +59,361 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  /* =========================================
+     LANDING HERO
+  ========================================= */
+
+  .landing-hero {
+    position: relative;
+    min-height: 100svh;
+    min-height: 100vh;
+    background: url('assets/images/landscape_background.png') center 30% / cover no-repeat;
+    background-color: var(--hero-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(5, 5, 14, 0.35) 0%,
+      rgba(5, 5, 14, 0.55) 35%,
+      rgba(8, 8, 15, 0.88) 75%,
+      #08080F 100%
+    );
+  }
+
+  /* Bottom fade into page background */
+  .hero-fade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 160px;
+    background: linear-gradient(to bottom, transparent, var(--bg));
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 24px 100px;
+    text-align: center;
+  }
+
+  /* Game title */
+  .hero-title-zh {
+    font-family: 'PageSerif', Georgia, serif;
+    font-size: clamp(3rem, 9.5vw, 6rem);
+    color: #EDE9DC;
+    letter-spacing: 0.22em;
+    line-height: 1;
+    text-shadow:
+      0 0 100px rgba(201, 168, 76, 0.5),
+      0 0 40px rgba(201, 168, 76, 0.25),
+      0 4px 32px rgba(0, 0, 0, 0.95);
+    margin-bottom: 10px;
+  }
+
+  .hero-title-en {
+    display: block;
+    font-family: 'PageSerif', Georgia, serif;
+    font-size: clamp(0.8rem, 2.4vw, 1.2rem);
+    color: var(--accent);
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin-bottom: 36px;
+    text-shadow: 0 0 24px rgba(201, 168, 76, 0.4);
+    opacity: 0.9;
+  }
+
+  /* Feature art */
+  .hero-artwork {
+    width: 100%;
+    max-width: 820px;
+    margin: 0 auto 36px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(201, 168, 76, 0.2),
+      0 20px 60px rgba(0, 0, 0, 0.75),
+      0 0 120px rgba(0, 0, 0, 0.4);
+  }
+
+  .hero-artwork img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Description */
+  .hero-tagline {
+    font-family: 'PageSerif', Georgia, serif;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: #DDD9CC;
+    font-style: italic;
+    margin-bottom: 10px;
+    opacity: 0.88;
+    letter-spacing: 0.02em;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+  }
+
+  .hero-desc {
+    font-size: clamp(0.875rem, 1.4vw, 0.975rem);
+    color: #9898B0;
+    max-width: 540px;
+    margin: 0 auto 38px;
+    line-height: 1.9;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
+  }
+
+  /* ---- Download buttons ---- */
+  .download-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    margin-bottom: 22px;
+  }
+
+  /* APK — primary gold CTA */
+  .btn-apk {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 36px;
+    background: linear-gradient(135deg, #D8B558 0%, #A87C2A 100%);
+    color: #100E08;
+    font-family: 'PageSans', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 8px;
+    letter-spacing: 0.04em;
+    box-shadow:
+      0 5px 26px rgba(201, 168, 76, 0.55),
+      0 1px 0 rgba(255, 255, 255, 0.18) inset;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .btn-apk:hover,
+  .btn-apk:focus {
+    transform: translateY(-3px);
+    box-shadow:
+      0 10px 36px rgba(201, 168, 76, 0.7),
+      0 1px 0 rgba(255, 255, 255, 0.18) inset;
+    outline: none;
+  }
+
+  .btn-apk svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    flex-shrink: 0;
+  }
+
+  /* Web — secondary ghost button */
+  .btn-web {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 30px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(201, 168, 76, 0.38);
+    color: #D8D4C8;
+    font-family: 'PageSans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    letter-spacing: 0.04em;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: background 0.18s, border-color 0.18s, transform 0.18s;
+  }
+
+  .btn-web:hover,
+  .btn-web:focus {
+    background: rgba(201, 168, 76, 0.12);
+    border-color: rgba(201, 168, 76, 0.58);
+    transform: translateY(-3px);
+    outline: none;
+  }
+
+  .btn-web svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  /* ---- App store badges ---- */
+  .store-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .store-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 18px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 9px;
+    opacity: 0.55;
+    cursor: default;
+    min-width: 168px;
+  }
+
+  .store-badge svg {
+    width: 22px;
+    height: 22px;
+    fill: #8888A0;
+    flex-shrink: 0;
+  }
+
+  .store-badge-text {
+    text-align: left;
+  }
+
+  .badge-eyebrow {
+    display: block;
+    font-size: 0.6rem;
+    color: #6A6A82;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+
+  .badge-name {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #A0A0B8;
+    letter-spacing: 0.01em;
+    line-height: 1.3;
+  }
+
+  .badge-soon {
+    display: block;
+    font-size: 0.6rem;
+    color: #A07830;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.6;
+  }
+
+  /* =========================================
+     MUSIC TOGGLE (fixed)
+  ========================================= */
+
+  .music-toggle {
+    position: fixed;
+    bottom: 22px;
+    right: 22px;
+    z-index: 200;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(10, 10, 20, 0.88);
+    border: 1px solid rgba(201, 168, 76, 0.28);
+    color: var(--accent);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: border-color 0.2s, box-shadow 0.2s, opacity 0.2s;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+  }
+
+  .music-toggle:hover {
+    border-color: rgba(201, 168, 76, 0.6);
+    box-shadow: 0 4px 22px rgba(201, 168, 76, 0.22);
+  }
+
+  .music-toggle svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .icon-note { display: block; }
+  .icon-mute { display: none; }
+  .music-toggle.is-playing .icon-note { display: none; }
+  .music-toggle.is-playing .icon-mute { display: block; }
+
+  /* Subtle pulse when playing */
+  @keyframes pulse-ring {
+    0%   { box-shadow: 0 4px 18px rgba(0,0,0,.45), 0 0 0 0 rgba(201,168,76,.35); }
+    70%  { box-shadow: 0 4px 18px rgba(0,0,0,.45), 0 0 0 9px rgba(201,168,76,0); }
+    100% { box-shadow: 0 4px 18px rgba(0,0,0,.45), 0 0 0 0 rgba(201,168,76,0); }
+  }
+  .music-toggle.is-playing {
+    animation: pulse-ring 2.4s ease-out infinite;
+  }
+
+  /* =========================================
+     SECTION DIVIDER
+  ========================================= */
+
+  .section-sep {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 24px;
+    max-width: 600px;
+    margin: 0 auto 48px;
+  }
+
+  .section-sep::before,
+  .section-sep::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .section-sep-label {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* =========================================
+     DELETION PAGE (existing styles)
+  ========================================= */
+
   .page {
     max-width: 600px;
     margin: 0 auto;
-    padding: 60px 24px 80px;
+    padding: 0 24px 80px;
   }
 
-  .header {
+  .page-header {
     text-align: center;
     margin-bottom: 48px;
   }
 
-  .header-game {
+  .page-header-game {
     font-family: 'PageSerif', Georgia, serif;
     font-size: 1.75rem;
     color: var(--heading);
@@ -79,7 +421,7 @@
     margin-bottom: 4px;
   }
 
-  .header-game .zh {
+  .page-header-game .zh {
     display: block;
     font-size: 0.65em;
     color: var(--accent);
@@ -87,7 +429,7 @@
     margin-bottom: 6px;
   }
 
-  .header-sub {
+  .page-header-sub {
     font-size: 0.8rem;
     color: var(--text-muted);
     letter-spacing: 0.06em;
@@ -281,23 +623,138 @@
   }
 
   @media (max-width: 480px) {
-    .page { padding: 40px 18px 60px; }
-    .header-game { font-size: 1.5rem; }
+    .page { padding: 0 18px 60px; }
+    .page-header-game { font-size: 1.5rem; }
+    .music-toggle { bottom: 14px; right: 14px; }
+    .hero-inner { padding: 60px 20px 80px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    * { transition: none !important; }
+    *, *::before, *::after {
+      transition: none !important;
+      animation: none !important;
+    }
   }
 </style>
 </head>
 <body>
+
+<!-- Background audio -->
+<audio id="bgMusic" src="assets/audio/moonblade_trail.mp3" loop preload="auto"></audio>
+
+<!-- Music toggle (fixed, bottom-right) -->
+<button id="musicToggle" class="music-toggle" aria-label="Play background music" title="Toggle background music">
+  <!-- Note icon — shown when paused -->
+  <svg class="icon-note" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M9 18V5l12-2v13"/>
+    <circle cx="6" cy="18" r="3"/>
+    <circle cx="18" cy="16" r="3"/>
+  </svg>
+  <!-- Muted icon — shown when playing (click to mute) -->
+  <svg class="icon-mute" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M9 18V5l12-2v13"/>
+    <circle cx="6" cy="18" r="3"/>
+    <circle cx="18" cy="16" r="3"/>
+    <line x1="3" y1="3" x2="21" y2="21" stroke="currentColor"/>
+  </svg>
+</button>
+
+<!-- ===================================================
+     LANDING HERO
+=================================================== -->
+<section class="landing-hero" aria-label="Game introduction">
+  <div class="hero-overlay"></div>
+  <div class="hero-fade"></div>
+
+  <div class="hero-inner">
+
+    <!-- Title -->
+    <h1 class="hero-title-zh">琴剑江湖</h1>
+    <span class="hero-title-en">Jianghu: Sword &amp; Zither</span>
+
+    <!-- Feature art banner -->
+    <div class="hero-artwork">
+      <img src="assets/images/android_feature.png"
+           alt="Two heroes wield glowing guqin zithers in a misty riverside garden">
+    </div>
+
+    <!-- Tagline & description -->
+    <p class="hero-tagline">"Where the zither becomes your sword."</p>
+    <p class="hero-desc">
+      Enter the ancient jianghu — a world of rival martial sects, sacred arts, and whispered legends.
+      Master the guqin and wield music itself as a force of devastating power.
+      Cultivate your inner energy, forge alliances, and claim your place among the immortal masters.
+    </p>
+
+    <!-- Download CTAs -->
+    <div class="download-row">
+      <!-- TODO: replace href="#" with the APK file path when available -->
+      <a class="btn-apk" href="#" aria-label="Download APK for Android">
+        <!-- Android download icon -->
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M17.5 3.5L14 7H10L6.5 3.5M3 7h18M5 7l1.5 10.5h11L19 7M9 11v4m6-4v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Download APK for Android
+      </a>
+
+      <a class="btn-web"
+         href="https://qinjianjianghu-production.up.railway.app/"
+         target="_blank"
+         rel="noopener noreferrer">
+        <!-- Globe icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 2c0 0-4 3.6-4 10s4 10 4 10 4-3.6 4-10S12 2 12 2z"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+        </svg>
+        Play on Web (Browser)
+      </a>
+    </div>
+
+    <!-- App-store placeholders -->
+    <div class="store-row">
+      <div class="store-badge" aria-label="Google Play — Coming Soon">
+        <!-- Google Play triangle icon -->
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 20.5v-17c0-.6.7-.9 1.1-.5l15 8.5a.6.6 0 010 1L4.1 21c-.4.4-1.1.1-1.1-.5z"/>
+        </svg>
+        <div class="store-badge-text">
+          <span class="badge-eyebrow">Get it on</span>
+          <span class="badge-name">Google Play</span>
+          <span class="badge-soon">Coming Soon</span>
+        </div>
+      </div>
+
+      <div class="store-badge" aria-label="App Store — Coming Soon">
+        <!-- Apple logo icon -->
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.15-2.22 1.3-2.2 3.88.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.33 2.7zM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+        </svg>
+        <div class="store-badge-text">
+          <span class="badge-eyebrow">Download on the</span>
+          <span class="badge-name">App Store</span>
+          <span class="badge-soon">Coming Soon</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================================================
+     ACCOUNT & DATA DELETION
+=================================================== -->
+<div class="section-sep" role="separator">
+  <span class="section-sep-label">Account &amp; Support</span>
+</div>
+
 <main class="page">
-  <header class="header">
-    <h1 class="header-game">
+  <header class="page-header">
+    <h2 class="page-header-game">
       <span class="zh">琴剑江湖</span>
-      Jianghu: Sword & Zither
-    </h1>
-    <p class="header-sub">Account &amp; Data Deletion</p>
+      Jianghu: Sword &amp; Zither
+    </h2>
+    <p class="page-header-sub">Account &amp; Data Deletion</p>
   </header>
 
   <div class="divider"></div>
@@ -351,16 +808,52 @@
   </section>
 
   <footer>
-    <p>HD Expanse &middot; 琴剑江湖 Jianghu: Sword & Zither</p>
+    <p>HD Expanse &middot; 琴剑江湖 Jianghu: Sword &amp; Zither</p>
   </footer>
+
   <section>
-  <h2>Privacy Policy</h2>
-  <p>
-    <a href="Jianghu_Sword_and_Zither_Privacy_Policy.html">
-      View the Jianghu: Sword and Zither Privacy Policy
-    </a>
-  </p>
-</section>
+    <h2>Privacy Policy</h2>
+    <p>
+      <a href="Jianghu_Sword_and_Zither_Privacy_Policy.html">
+        View the Jianghu: Sword and Zither Privacy Policy
+      </a>
+    </p>
+  </section>
 </main>
+
+<script>
+  const music = document.getElementById('bgMusic');
+  const btn = document.getElementById('musicToggle');
+  let playing = false;
+
+  function setState(on) {
+    playing = on;
+    btn.classList.toggle('is-playing', on);
+    btn.setAttribute('aria-label', on ? 'Pause background music' : 'Play background music');
+  }
+
+  function tryPlay() {
+    music.volume = 0.4;
+    const p = music.play();
+    if (p) p.then(() => setState(true)).catch(() => setState(false));
+  }
+
+  window.addEventListener('load', tryPlay);
+
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (playing) { music.pause(); setState(false); }
+    else { music.play().then(() => setState(true)).catch(() => {}); }
+  });
+
+  /* Attempt autoplay on first user gesture (browsers that block silent autoplay) */
+  function onFirstGesture() {
+    if (!playing) tryPlay();
+    document.removeEventListener('click', onFirstGesture);
+    document.removeEventListener('touchstart', onFirstGesture);
+  }
+  document.addEventListener('click', onFirstGesture);
+  document.addEventListener('touchstart', onFirstGesture, { passive: true });
+</script>
 </body>
 </html>
