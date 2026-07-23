@@ -19,31 +19,15 @@
 
   :root {
     --bg: #0B0B12;
-    --bg-card: #12121C;
-    --border: #2A2A3A;
-    --text: #D0CFC8;
-    --text-muted: #7A7A8A;
-    --heading: #E8E4D8;
+    --bg-card: #14141E;
+    --border: #30303E;
+    --text: #E0DDD5;
+    --text-muted: #9090A2;
+    --heading: #EDE9DC;
     --accent: #C9A84C;
-    --accent-dim: rgba(201, 168, 76, 0.12);
+    --accent-dim: rgba(201, 168, 76, 0.14);
     --danger: #B83A3A;
-    --danger-dim: rgba(184, 58, 58, 0.08);
-    --hero-dark: #08080F;
-  }
-
-  @media (prefers-color-scheme: light) {
-    :root {
-      --bg: #F5F3ED;
-      --bg-card: #FFFFFF;
-      --border: #DDD9CE;
-      --text: #3A3A42;
-      --text-muted: #8A8A96;
-      --heading: #1A1A22;
-      --accent: #9A7B2E;
-      --accent-dim: rgba(154, 123, 46, 0.08);
-      --danger: #A03030;
-      --danger-dim: rgba(160, 48, 48, 0.06);
-    }
+    --danger-dim: rgba(184, 58, 58, 0.1);
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -51,7 +35,6 @@
   html {
     font-size: 16px;
     scroll-behavior: smooth;
-    /* Fixed background shared across the whole page */
     background: url('assets/images/landscape_background.png') fixed center 30% / cover #08080F;
   }
 
@@ -63,6 +46,14 @@
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
   }
+
+  /* =========================================
+     BILINGUAL: default English, toggle Chinese
+  ========================================= */
+
+  .loc-zh { display: none; }
+  html.zh .loc-en { display: none; }
+  html.zh .loc-zh { display: revert; }
 
   /* =========================================
      LANDING HERO
@@ -84,23 +75,12 @@
     inset: 0;
     background: linear-gradient(
       to bottom,
-      rgba(5, 5, 14, 0.3) 0%,
-      rgba(5, 5, 14, 0.5) 35%,
-      rgba(8, 8, 15, 0.82) 75%,
-      rgba(8, 8, 15, 0.92) 100%
+      rgba(5, 5, 14, 0.28) 0%,
+      rgba(5, 5, 14, 0.48) 30%,
+      rgba(8, 8, 15, 0.80) 68%,
+      rgba(8, 8, 15, 0.96) 90%,
+      rgba(8, 8, 15, 1.00) 100%
     );
-  }
-
-  /* =========================================
-     SUPPORT PANEL — shares the fixed bg image
-  ========================================= */
-
-  .support-panel {
-    background: rgba(8, 8, 15, 0.88);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    border-top: 1px solid rgba(201, 168, 76, 0.12);
-    padding-top: 60px;
   }
 
   .hero-inner {
@@ -109,7 +89,7 @@
     width: 100%;
     max-width: 900px;
     margin: 0 auto;
-    padding: 80px 24px 100px;
+    padding: 80px 24px 60px;
     text-align: center;
   }
 
@@ -130,13 +110,14 @@
   .hero-title-en {
     display: block;
     font-family: 'PageSerif', Georgia, serif;
-    font-size: clamp(0.8rem, 2.4vw, 1.2rem);
-    color: var(--accent);
-    letter-spacing: 0.32em;
+    font-size: clamp(0.85rem, 2.4vw, 1.25rem);
+    color: #DFC070;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
     margin-bottom: 36px;
-    text-shadow: 0 0 24px rgba(201, 168, 76, 0.4);
-    opacity: 0.9;
+    text-shadow:
+      0 0 30px rgba(201, 168, 76, 0.6),
+      0 2px 12px rgba(0, 0, 0, 0.9);
   }
 
   /* Feature art */
@@ -164,20 +145,23 @@
     font-size: clamp(1rem, 2vw, 1.3rem);
     color: #DDD9CC;
     font-style: italic;
-    margin-bottom: 10px;
-    opacity: 0.88;
+    margin-bottom: 14px;
     letter-spacing: 0.02em;
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
   }
 
   .hero-desc {
     font-size: clamp(0.875rem, 1.4vw, 0.975rem);
-    color: #9898B0;
-    max-width: 540px;
+    color: #AEAEC0;
+    max-width: 580px;
     margin: 0 auto 38px;
     line-height: 1.9;
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
+    text-align: left;
   }
+
+  .hero-desc p { margin-bottom: 12px; }
+  .hero-desc p:last-child { margin-bottom: 0; }
 
   /* ---- Download buttons ---- */
   .download-row {
@@ -188,7 +172,6 @@
     margin-bottom: 22px;
   }
 
-  /* APK — primary gold CTA */
   .btn-apk {
     display: inline-flex;
     align-items: center;
@@ -208,8 +191,7 @@
     transition: transform 0.18s ease, box-shadow 0.18s ease;
   }
 
-  .btn-apk:hover,
-  .btn-apk:focus {
+  .btn-apk:hover, .btn-apk:focus {
     transform: translateY(-3px);
     box-shadow:
       0 10px 36px rgba(201, 168, 76, 0.7),
@@ -217,14 +199,8 @@
     outline: none;
   }
 
-  .btn-apk svg {
-    width: 20px;
-    height: 20px;
-    fill: currentColor;
-    flex-shrink: 0;
-  }
+  .btn-apk svg { width: 20px; height: 20px; fill: currentColor; flex-shrink: 0; }
 
-  /* Web — secondary ghost button */
   .btn-web {
     display: inline-flex;
     align-items: center;
@@ -244,19 +220,14 @@
     transition: background 0.18s, border-color 0.18s, transform 0.18s;
   }
 
-  .btn-web:hover,
-  .btn-web:focus {
+  .btn-web:hover, .btn-web:focus {
     background: rgba(201, 168, 76, 0.12);
     border-color: rgba(201, 168, 76, 0.58);
     transform: translateY(-3px);
     outline: none;
   }
 
-  .btn-web svg {
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-  }
+  .btn-web svg { width: 18px; height: 18px; flex-shrink: 0; }
 
   /* ---- App store badges ---- */
   .store-row {
@@ -279,47 +250,67 @@
     min-width: 168px;
   }
 
-  .store-badge svg {
-    width: 22px;
-    height: 22px;
-    fill: #8888A0;
-    flex-shrink: 0;
+  .store-badge svg { width: 22px; height: 22px; fill: #8888A0; flex-shrink: 0; }
+  .store-badge-text { text-align: left; }
+  .badge-eyebrow { display: block; font-size: 0.6rem; color: #6A6A82; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.3; }
+  .badge-name { display: block; font-size: 0.88rem; font-weight: 600; color: #A0A0B8; letter-spacing: 0.01em; line-height: 1.3; }
+  .badge-soon { display: block; font-size: 0.6rem; color: #A07830; letter-spacing: 0.14em; text-transform: uppercase; line-height: 1.6; }
+
+  /* =========================================
+     SUPPORT PANEL
+     Connects to hero via gradient ::before
+  ========================================= */
+
+  .support-panel {
+    position: relative;
+    background: rgba(8, 8, 15, 0.9);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-top: 1px solid rgba(201, 168, 76, 0.14);
+    padding-top: 60px;
   }
 
-  .store-badge-text {
-    text-align: left;
-  }
-
-  .badge-eyebrow {
-    display: block;
-    font-size: 0.6rem;
-    color: #6A6A82;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    line-height: 1.3;
-  }
-
-  .badge-name {
-    display: block;
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: #A0A0B8;
-    letter-spacing: 0.01em;
-    line-height: 1.3;
-  }
-
-  .badge-soon {
-    display: block;
-    font-size: 0.6rem;
-    color: #A07830;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    line-height: 1.6;
+  /* Gradient connector that overlaps the hero bottom, hiding the seam */
+  .support-panel::before {
+    content: '';
+    position: absolute;
+    top: -80px;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, rgba(8, 8, 15, 0.9));
+    pointer-events: none;
   }
 
   /* =========================================
-     MUSIC TOGGLE (fixed)
+     FIXED BUTTONS (music + language)
   ========================================= */
+
+  .lang-toggle {
+    position: fixed;
+    bottom: 76px;
+    right: 22px;
+    z-index: 200;
+    padding: 7px 14px;
+    border-radius: 20px;
+    background: rgba(10, 10, 20, 0.88);
+    border: 1px solid rgba(201, 168, 76, 0.28);
+    color: #C9A84C;
+    cursor: pointer;
+    font-family: 'PageSans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+  }
+
+  .lang-toggle:hover {
+    border-color: rgba(201, 168, 76, 0.6);
+    box-shadow: 0 4px 22px rgba(201, 168, 76, 0.22);
+  }
 
   .music-toggle {
     position: fixed;
@@ -331,14 +322,14 @@
     border-radius: 50%;
     background: rgba(10, 10, 20, 0.88);
     border: 1px solid rgba(201, 168, 76, 0.28);
-    color: var(--accent);
+    color: #C9A84C;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    transition: border-color 0.2s, box-shadow 0.2s, opacity 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
   }
 
@@ -348,13 +339,9 @@
   }
 
   .music-toggle svg {
-    width: 20px;
-    height: 20px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+    width: 20px; height: 20px;
+    fill: none; stroke: currentColor;
+    stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
   }
 
   .icon-note { display: block; }
@@ -362,15 +349,12 @@
   .music-toggle.is-playing .icon-note { display: none; }
   .music-toggle.is-playing .icon-mute { display: block; }
 
-  /* Subtle pulse when playing */
   @keyframes pulse-ring {
     0%   { box-shadow: 0 4px 18px rgba(0,0,0,.45), 0 0 0 0 rgba(201,168,76,.35); }
     70%  { box-shadow: 0 4px 18px rgba(0,0,0,.45), 0 0 0 9px rgba(201,168,76,0); }
     100% { box-shadow: 0 4px 18px rgba(0,0,0,.45), 0 0 0 0 rgba(201,168,76,0); }
   }
-  .music-toggle.is-playing {
-    animation: pulse-ring 2.4s ease-out infinite;
-  }
+  .music-toggle.is-playing { animation: pulse-ring 2.4s ease-out infinite; }
 
   /* =========================================
      SECTION DIVIDER
@@ -402,7 +386,7 @@
   }
 
   /* =========================================
-     DELETION PAGE (existing styles)
+     DELETION PAGE
   ========================================= */
 
   .page {
@@ -424,7 +408,7 @@
     margin-bottom: 4px;
   }
 
-  .page-header-game .zh {
+  .page-header-game .zh-name {
     display: block;
     font-size: 0.65em;
     color: var(--accent);
@@ -455,15 +439,9 @@
     letter-spacing: 0.02em;
   }
 
-  section {
-    margin-bottom: 36px;
-  }
+  section { margin-bottom: 36px; }
 
-  p {
-    margin-bottom: 14px;
-    font-size: 0.925rem;
-  }
-
+  p { margin-bottom: 14px; font-size: 0.925rem; }
   p:last-child { margin-bottom: 0; }
 
   .data-list {
@@ -493,18 +471,9 @@
     font-weight: bold;
   }
 
-  .steps {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-top: 16px;
-  }
+  .steps { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; }
 
-  .step {
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-  }
+  .step { display: flex; gap: 16px; align-items: flex-start; }
 
   .step-num {
     flex-shrink: 0;
@@ -522,14 +491,8 @@
     margin-top: 2px;
   }
 
-  .step-body {
-    font-size: 0.9rem;
-    flex: 1;
-  }
-
-  .step-body strong {
-    color: var(--heading);
-  }
+  .step-body { font-size: 0.9rem; flex: 1; }
+  .step-body strong { color: var(--heading); }
 
   .email-card {
     display: flex;
@@ -559,8 +522,7 @@
     transition: border-color 0.2s;
   }
 
-  .email-link:hover,
-  .email-link:focus {
+  .email-link:hover, .email-link:focus {
     border-bottom-color: var(--accent);
     outline: none;
   }
@@ -584,17 +546,12 @@
     transition: background 0.2s;
   }
 
-  .email-btn:hover,
-  .email-btn:focus {
-    background: rgba(201, 168, 76, 0.2);
+  .email-btn:hover, .email-btn:focus {
+    background: rgba(201, 168, 76, 0.22);
     outline: none;
   }
 
-  .email-btn svg {
-    width: 16px;
-    height: 16px;
-    fill: currentColor;
-  }
+  .email-btn svg { width: 16px; height: 16px; fill: currentColor; }
 
   .timeline-note {
     font-size: 0.85rem;
@@ -620,40 +577,40 @@
     text-align: center;
   }
 
-  footer p {
-    font-size: 0.78rem;
-    color: var(--text-muted);
-  }
+  footer p { font-size: 0.78rem; color: var(--text-muted); }
+
+  a { color: var(--accent); }
 
   @media (max-width: 480px) {
     .page { padding: 0 18px 60px; }
     .page-header-game { font-size: 1.5rem; }
     .music-toggle { bottom: 14px; right: 14px; }
-    .hero-inner { padding: 60px 20px 80px; }
+    .lang-toggle { bottom: 68px; right: 14px; }
+    .hero-inner { padding: 60px 20px 60px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      transition: none !important;
-      animation: none !important;
-    }
+    *, *::before, *::after { transition: none !important; animation: none !important; }
   }
 </style>
 </head>
 <body>
 
-<!-- Background audio -->
 <audio id="bgMusic" src="assets/audio/moonblade_trail.mp3" loop preload="auto"></audio>
 
-<!-- Music toggle (fixed, bottom-right) -->
+<!-- Language toggle -->
+<button id="langToggle" class="lang-toggle" title="Switch language">
+  <span class="loc-en">中文</span>
+  <span class="loc-zh">EN</span>
+</button>
+
+<!-- Music toggle -->
 <button id="musicToggle" class="music-toggle" aria-label="Play background music" title="Toggle background music">
-  <!-- Note icon — shown when paused -->
   <svg class="icon-note" viewBox="0 0 24 24" aria-hidden="true">
     <path d="M9 18V5l12-2v13"/>
     <circle cx="6" cy="18" r="3"/>
     <circle cx="18" cy="16" r="3"/>
   </svg>
-  <!-- Muted icon — shown when playing (click to mute) -->
   <svg class="icon-mute" viewBox="0 0 24 24" aria-hidden="true">
     <path d="M9 18V5l12-2v13"/>
     <circle cx="6" cy="18" r="3"/>
@@ -670,72 +627,87 @@
 
   <div class="hero-inner">
 
-    <!-- Title -->
     <h1 class="hero-title-zh">琴剑江湖</h1>
     <span class="hero-title-en">Jianghu: Sword &amp; Zither</span>
 
-    <!-- Feature art banner -->
     <div class="hero-artwork">
       <img src="assets/images/android_feature.png"
            alt="Two heroes wield glowing guqin zithers in a misty riverside garden">
     </div>
 
-    <!-- Tagline & description -->
-    <p class="hero-tagline">"Where the zither becomes your sword."</p>
-    <p class="hero-desc">
-      Enter the ancient jianghu — a world of rival martial sects, sacred arts, and whispered legends.
-      Master the guqin and wield music itself as a force of devastating power.
-      Cultivate your inner energy, forge alliances, and claim your place among the immortal masters.
+    <p class="hero-tagline">
+      <span class="loc-en">"Where the zither becomes your sword."</span>
+      <span class="loc-zh">「以琴为剑，以音为道。」</span>
     </p>
 
-    <!-- Download CTAs -->
+    <div class="hero-desc loc-en">
+      <p>For generations, the Xuanyin Sect has called Mount Jade Mist its home, cultivating the arts of music and inner strength. Within its walls, music is not merely art — every melody becomes a weapon, every note a testament to years of cultivation. Guardian of this tradition is Master Mo Wenyin, keeper of the sect's centuries-old legacy.</p>
+      <p>But beneath the calm of Jianghu, old conflicts stir. Wei Chengzhi, once a disciple of the Xuanyin Sect, returns bearing the forbidden Rending Resonance Technique — a martial art designed to unravel the sect's very foundation. Three infamous factions answer his call, and together they march on Mount Jade Mist.</p>
+      <p>Choose your path. Become Han Yuan or Yun Lan, defend the Xuanyin Sect, and let your melody shape the fate of Jianghu.</p>
+    </div>
+
+    <div class="hero-desc loc-zh">
+      <p>数百年来，玄音门立足于玉雾山，以音律修心，以内力悟武，代代相传，从未断绝。在这里，音律不仅是艺术，更是武学之道——琴音可凝聚真气，旋律可化作攻守之势。守护这份传承的，是玄音门掌门莫闻音。</p>
+      <p>然而，江湖暗流涌动，一股黑暗势力悄然崛起。昔日玄音门弟子魏承志，携禁术《裂音诀》卷土重来，专克玄音门音律真气，且此番并非孤身而至。三大邪派随其兵临玉雾山，一场浩劫即将降临。</p>
+      <p>化身寒渊或云岚，执琴迎敌，守护玄音门，在这场风云际会中，谱写属于你的江湖传奇。</p>
+    </div>
+
     <div class="download-row">
-      <!-- TODO: replace href="#" with the APK file path when available -->
+      <!-- TODO: replace href="#" with APK file path when available -->
       <a class="btn-apk" href="#" aria-label="Download APK for Android">
-        <!-- Android download icon -->
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M17.5 3.5L14 7H10L6.5 3.5M3 7h18M5 7l1.5 10.5h11L19 7M9 11v4m6-4v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        Download APK for Android
+        <span class="loc-en">Download APK for Android</span>
+        <span class="loc-zh">下载安卓 APK</span>
       </a>
 
       <a class="btn-web"
          href="https://qinjianjianghu-production.up.railway.app/"
          target="_blank"
          rel="noopener noreferrer">
-        <!-- Globe icon -->
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="10"/>
           <path d="M12 2c0 0-4 3.6-4 10s4 10 4 10 4-3.6 4-10S12 2 12 2z"/>
           <line x1="2" y1="12" x2="22" y2="12"/>
         </svg>
-        Play on Web (Browser)
+        <span class="loc-en">Play on Web (Browser)</span>
+        <span class="loc-zh">在浏览器中游玩</span>
       </a>
     </div>
 
-    <!-- App-store placeholders -->
     <div class="store-row">
       <div class="store-badge" aria-label="Google Play — Coming Soon">
-        <!-- Google Play triangle icon -->
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M3 20.5v-17c0-.6.7-.9 1.1-.5l15 8.5a.6.6 0 010 1L4.1 21c-.4.4-1.1.1-1.1-.5z"/>
         </svg>
         <div class="store-badge-text">
-          <span class="badge-eyebrow">Get it on</span>
+          <span class="badge-eyebrow">
+            <span class="loc-en">Get it on</span>
+            <span class="loc-zh">立即获取</span>
+          </span>
           <span class="badge-name">Google Play</span>
-          <span class="badge-soon">Coming Soon</span>
+          <span class="badge-soon">
+            <span class="loc-en">Coming Soon</span>
+            <span class="loc-zh">即将上线</span>
+          </span>
         </div>
       </div>
 
       <div class="store-badge" aria-label="App Store — Coming Soon">
-        <!-- Apple logo icon -->
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.15-2.22 1.3-2.2 3.88.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.33 2.7zM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
         </svg>
         <div class="store-badge-text">
-          <span class="badge-eyebrow">Download on the</span>
+          <span class="badge-eyebrow">
+            <span class="loc-en">Download on the</span>
+            <span class="loc-zh">下载自</span>
+          </span>
           <span class="badge-name">App Store</span>
-          <span class="badge-soon">Coming Soon</span>
+          <span class="badge-soon">
+            <span class="loc-en">Coming Soon</span>
+            <span class="loc-zh">即将上线</span>
+          </span>
         </div>
       </div>
     </div>
@@ -747,66 +719,95 @@
      ACCOUNT & DATA DELETION
 =================================================== -->
 <div class="support-panel">
+
 <div class="section-sep" role="separator">
-  <span class="section-sep-label">Account &amp; Support</span>
+  <span class="section-sep-label">
+    <span class="loc-en">Account &amp; Support</span>
+    <span class="loc-zh">账户与客服</span>
+  </span>
 </div>
 
 <main class="page">
   <header class="page-header">
     <h2 class="page-header-game">
-      <span class="zh">琴剑江湖</span>
+      <span class="zh-name">琴剑江湖</span>
       Jianghu: Sword &amp; Zither
     </h2>
-    <p class="page-header-sub">Account &amp; Data Deletion</p>
+    <p class="page-header-sub">
+      <span class="loc-en">Account &amp; Data Deletion</span>
+      <span class="loc-zh">账户与数据删除</span>
+    </p>
   </header>
 
   <div class="divider"></div>
 
   <section>
-    <h2>What gets deleted</h2>
-    <p>When you request account deletion, we permanently remove all data associated with your account from our servers:</p>
+    <h2>
+      <span class="loc-en">What gets deleted</span>
+      <span class="loc-zh">将被删除的数据</span>
+    </h2>
+    <p>
+      <span class="loc-en">When you request account deletion, we permanently remove all data associated with your account from our servers:</span>
+      <span class="loc-zh">申请删除账户后，我们将从服务器上永久清除与您账户相关的所有数据：</span>
+    </p>
     <ul class="data-list">
-      <li>Your account and login credentials</li>
-      <li>Character progress, levels, and cultivation points</li>
-      <li>Leaderboard entries (all-time, weekly, monthly)</li>
-      <li>Purchase history and currency balances (Gold &amp; Silver)</li>
-      <li>Cosmetics, inventory, and equipped items</li>
-      <li>Gameplay session logs</li>
-      <li>Redeemed codes and daily reward history</li>
+      <li><span class="loc-en">Your account and login credentials</span><span class="loc-zh">账户信息与登录凭证</span></li>
+      <li><span class="loc-en">Character progress, levels, and cultivation points</span><span class="loc-zh">角色进度、等级与修为点数</span></li>
+      <li><span class="loc-en">Leaderboard entries (all-time, weekly, monthly)</span><span class="loc-zh">排行榜记录（总榜、周榜、月榜）</span></li>
+      <li><span class="loc-en">Purchase history and currency balances (Gold &amp; Silver)</span><span class="loc-zh">充值记录与货币余额（金币与银币）</span></li>
+      <li><span class="loc-en">Cosmetics, inventory, and equipped items</span><span class="loc-zh">外观装扮、背包物品与装备</span></li>
+      <li><span class="loc-en">Gameplay session logs</span><span class="loc-zh">游戏会话日志</span></li>
+      <li><span class="loc-en">Redeemed codes and daily reward history</span><span class="loc-zh">已兑换礼品码及每日签到记录</span></li>
     </ul>
-    <p>This action is permanent and cannot be undone. If you play again after deletion, you will start with a fresh guest account.</p>
+    <p>
+      <span class="loc-en">This action is permanent and cannot be undone. If you play again after deletion, you will start with a fresh guest account.</span>
+      <span class="loc-zh">此操作不可逆转，删除后将无法恢复。若再次游玩，将以全新游客账户开始。</span>
+    </p>
   </section>
 
   <section>
-    <h2>How to request deletion</h2>
+    <h2>
+      <span class="loc-en">How to request deletion</span>
+      <span class="loc-zh">如何申请删除账户</span>
+    </h2>
 
     <div class="steps">
       <div class="step">
         <span class="step-num">1</span>
         <div class="step-body">
-          <strong>From inside the app</strong> — open your Profile and tap <strong>Delete Account</strong>. Your account and all data will be removed immediately.
-          <p class="inapp-note">This is the fastest way and takes effect instantly.</p>
+          <span class="loc-en"><strong>From inside the app</strong> — open your Profile and tap <strong>Delete Account</strong>. Your account and all data will be removed immediately.</span>
+          <span class="loc-zh"><strong>在游戏内操作</strong> — 打开个人资料，点击<strong>「删除账户」</strong>。账户及所有数据将即时删除。</span>
+          <p class="inapp-note">
+            <span class="loc-en">This is the fastest way and takes effect instantly.</span>
+            <span class="loc-zh">这是最快的方式，操作后立即生效。</span>
+          </p>
         </div>
       </div>
       <div class="step">
         <span class="step-num">2</span>
         <div class="step-body">
-          <strong>If you no longer have the app</strong> — send us an email with the address you registered with, and we will delete your account manually.
+          <span class="loc-en"><strong>If you no longer have the app</strong> — send us an email with the address you registered with, and we will delete your account manually.</span>
+          <span class="loc-zh"><strong>若已卸载游戏</strong> — 请发送邮件至以下地址，附上注册账户的邮箱，我们将人工处理您的删除申请。</span>
         </div>
       </div>
     </div>
 
     <div class="email-card">
-      <span class="email-label">Send deletion requests to</span>
+      <span class="email-label">
+        <span class="loc-en">Send deletion requests to</span>
+        <span class="loc-zh">发送删除申请至</span>
+      </span>
       <a class="email-link" href="mailto:lonelyscrub8@gmail.com?subject=Account%20Deletion%20Request%20%E2%80%94%20%E7%90%B4%E5%89%91%E6%B1%9F%E6%B9%96&body=Please%20delete%20my%20account.%20My%20registered%20email%20is%3A%20">lonelyscrub8@gmail.com</a>
       <a class="email-btn" href="mailto:lonelyscrub8@gmail.com?subject=Account%20Deletion%20Request%20%E2%80%94%20%E7%90%B4%E5%89%91%E6%B1%9F%E6%B9%96&body=Please%20delete%20my%20account.%20My%20registered%20email%20is%3A%20">
         <svg viewBox="0 0 20 20"><path d="M2.5 4.5h15a1 1 0 011 1v9a1 1 0 01-1 1h-15a1 1 0 01-1-1v-9a1 1 0 011-1zm0 1l7.5 5 7.5-5m-15 0v9h15v-9" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
-        Send Request
+        <span class="loc-en">Send Request</span>
+        <span class="loc-zh">发送申请</span>
       </a>
     </div>
 
     <div class="timeline-note">
-      Email requests are processed within 7 business days. You will receive a confirmation once your data has been removed.
+      <span class="loc-en">Email requests are processed within 7 business days. You will receive a confirmation once your data has been removed.</span>
+      <span class="loc-zh">邮件申请将在 7 个工作日内处理完毕。数据删除后，我们将向您发送确认邮件。</span>
     </div>
   </section>
 
@@ -815,10 +816,14 @@
   </footer>
 
   <section>
-    <h2>Privacy Policy</h2>
+    <h2>
+      <span class="loc-en">Privacy Policy</span>
+      <span class="loc-zh">隐私政策</span>
+    </h2>
     <p>
       <a href="Jianghu_Sword_and_Zither_Privacy_Policy.html">
-        View the Jianghu: Sword and Zither Privacy Policy
+        <span class="loc-en">View the Jianghu: Sword and Zither Privacy Policy</span>
+        <span class="loc-zh">查看《琴剑江湖》隐私政策</span>
       </a>
     </p>
   </section>
@@ -826,8 +831,18 @@
 </div><!-- /.support-panel -->
 
 <script>
+  /* --- Language --- */
+  const userLang = navigator.language || navigator.userLanguage || 'en';
+  if (/^zh/i.test(userLang)) document.documentElement.classList.add('zh');
+
+  document.getElementById('langToggle').addEventListener('click', (e) => {
+    e.stopPropagation();
+    document.documentElement.classList.toggle('zh');
+  });
+
+  /* --- Music --- */
   const music = document.getElementById('bgMusic');
-  const btn = document.getElementById('musicToggle');
+  const btn   = document.getElementById('musicToggle');
   let playing = false;
 
   function setState(on) {
@@ -850,7 +865,6 @@
     else { music.play().then(() => setState(true)).catch(() => {}); }
   });
 
-  /* Attempt autoplay on first user gesture (browsers that block silent autoplay) */
   function onFirstGesture() {
     if (!playing) tryPlay();
     document.removeEventListener('click', onFirstGesture);
