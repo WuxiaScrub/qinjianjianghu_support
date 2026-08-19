@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://wuxiascrub.github.io/qinjianjianghu_support/sitemap.xml

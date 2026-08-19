@@ -2,9 +2,38 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>琴剑江湖 — Jianghu: Sword &amp; Zither</title>
+<title>Jianghu: Sword &amp; Zither (琴剑江湖) — Wuxia RPG | Play Free</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Jianghu: Sword &amp; Zither — A wuxia RPG where you wield the guqin as a weapon of power. Download on Android or play in your browser.">
+<meta name="description" content="Jianghu: Sword &amp; Zither (琴剑江湖) — Free wuxia RPG where the guqin becomes your weapon. Master martial arts and defend your sect. Play in browser or download on Android.">
+<link rel="canonical" href="https://wuxiascrub.github.io/qinjianjianghu_support/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jianghu: Sword &amp; Zither — Wuxia RPG">
+<meta property="og:description" content="A wuxia RPG where the guqin becomes your weapon. Download on Android or play in your browser.">
+<meta property="og:url" content="https://wuxiascrub.github.io/qinjianjianghu_support/">
+<meta property="og:image" content="https://wuxiascrub.github.io/qinjianjianghu_support/assets/images/android_feature.png">
+<meta property="og:image:alt" content="Two heroes wield glowing guqin zithers in a misty riverside garden">
+<meta property="og:site_name" content="Jianghu: Sword &amp; Zither">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Jianghu: Sword &amp; Zither — Wuxia RPG">
+<meta name="twitter:description" content="A wuxia RPG where the guqin becomes your weapon. Download on Android or play in your browser.">
+<meta name="twitter:image" content="https://wuxiascrub.github.io/qinjianjianghu_support/assets/images/android_feature.png">
+<meta name="twitter:image:alt" content="Two heroes wield glowing guqin zithers in a misty riverside garden">
+<meta name="theme-color" content="#0B0B12">
+<meta name="keywords" content="wuxia RPG, guqin game, martial arts RPG, jianghu game, 琴剑江湖, Chinese RPG, sword and zither, kung fu game, indie RPG">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" href="favicon.ico">
+<!-- Google Analytics — replace G-192RZQRKTC with your real measurement ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-192RZQRKTC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-192RZQRKTC');
+</script>
 <style>
   @font-face {
     font-family: 'PageSerif';
@@ -737,6 +766,40 @@
     *, *::before, *::after { transition: none !important; animation: none !important; }
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "Jianghu: Sword & Zither",
+  "alternateName": "琴剑江湖",
+  "description": "A wuxia RPG where you wield the guqin as a weapon of power. Download on Android or play in your browser.",
+  "url": "https://wuxiascrub.github.io/qinjianjianghu_support/",
+  "image": "https://wuxiascrub.github.io/qinjianjianghu_support/assets/images/android_feature.png",
+  "genre": ["Role-playing game", "Wuxia", "Martial Arts"],
+  "gamePlatform": ["Android", "Web browser"],
+  "operatingSystem": "Android",
+  "applicationCategory": "Game",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "url": "https://play.google.com/store/apps/details?id=com.hdexpanse.qinjianjianghu"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "HD Expanse"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "HD Expanse"
+  },
+  "inLanguage": ["en", "zh"],
+  "sameAs": [
+    "https://play.google.com/store/apps/details?id=com.hdexpanse.qinjianjianghu"
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -1065,6 +1128,17 @@
   }
   document.addEventListener('click', onFirstGesture);
   document.addEventListener('touchstart', onFirstGesture, { passive: true });
+
+  /* --- CTA click tracking (GA4 events) --- */
+  document.querySelector('.btn-apk')?.addEventListener('click', () => {
+    gtag('event', 'download_apk', { event_category: 'engagement' });
+  });
+  document.querySelector('.btn-web')?.addEventListener('click', () => {
+    gtag('event', 'play_on_web', { event_category: 'engagement' });
+  });
+  document.querySelector('.store-badge-active')?.addEventListener('click', () => {
+    gtag('event', 'google_play_click', { event_category: 'engagement' });
+  });
 </script>
 </body>
 </html>
