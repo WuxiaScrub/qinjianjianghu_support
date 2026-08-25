@@ -1071,11 +1071,15 @@
     zh: 'assets/videos/android_promo_zh.mp4'
   };
 
+  let musicWasPlaying = false;
+
   function openIntroVideo() {
     const lang = document.documentElement.classList.contains('zh') ? 'zh' : 'en';
     introPlayer.src = introSources[lang];
     introModal.classList.add('is-open');
     document.body.style.overflow = 'hidden';
+    musicWasPlaying = playing;
+    if (playing) { music.pause(); setState(false); }
     introPlayer.play().catch(() => {});
   }
 
@@ -1085,6 +1089,7 @@
     introPlayer.pause();
     introPlayer.removeAttribute('src');
     introPlayer.load();
+    if (musicWasPlaying) { music.play().then(() => setState(true)).catch(() => {}); }
   }
 
   document.getElementById('introVideoTrigger').addEventListener('click', openIntroVideo);
