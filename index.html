@@ -1074,6 +1074,8 @@
   let musicWasPlaying = false;
 
   function openIntroVideo() {
+    document.removeEventListener('click', onFirstGesture);
+    document.removeEventListener('touchstart', onFirstGesture);
     const lang = document.documentElement.classList.contains('zh') ? 'zh' : 'en';
     introPlayer.src = introSources[lang];
     introModal.classList.add('is-open');
